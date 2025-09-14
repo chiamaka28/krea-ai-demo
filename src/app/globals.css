@@ -5,11 +5,6 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --icon-color: #111;
-}
-
-.dark-mode {
-  --icon-color: #eee; /* Dark mode color */
 }
 
 @theme inline {
@@ -31,6 +26,5 @@ body {
 }
 
 svg {
-  color: var(--icon-color);
-  transition: color 0.3s ease-in-out; /* smooth transition */
+  transition: color 0.3s ease-in-out;
 }

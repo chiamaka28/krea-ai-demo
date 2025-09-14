@@ -8,18 +8,30 @@ import {
   GradientEdit,
   GradientLipsync,
 } from '@/lib/icons';
+import { Collapsible, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Button } from './ui/button';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import Container from './ui/container';
+import { ChevronDown } from 'lucide-react';
 
 export default function Main() {
   return (
-    <Container className='mb-10'>
-      <h4 className='text-lg font-semibold mb-3 text-black dark:text-white'>
-        Generate
-      </h4>
-      <div className='grid  gap-3 grid-cols-1 md:grid-cols-3 lg:grid-cols-4'>
+    <Container className='mb-10 mt-5'>
+      <div className='flex justify-between items-center'>
+        <div>
+          <h4 className='text-lg font-semibold mb-3 text-black dark:text-white'>
+            Generate
+          </h4>
+        </div>
+        <Collapsible>
+          <CollapsibleTrigger className='flex items-center gap-1'>
+            <ChevronDown className='text-blue-700 w-4 h-4' />{' '}
+            <p className='text-sm text-blue-700'>Show All</p>
+          </CollapsibleTrigger>
+        </Collapsible>
+      </div>
+      <div className='grid  gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {data.map((item, idx) => {
           return (
             <Link

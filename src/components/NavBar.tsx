@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import MobileNav from './MobileMenu';
 import { useTheme } from '@/components/context/ThemeProvider';
 import {
   Logo,
@@ -20,8 +19,8 @@ import {
   GradientEdit,
   GradientLipsync,
   GradientRestyle,
-  GradientTrain,
   GradientAsset,
+  Hamburger,
 } from '@/lib/icons';
 import {
   Tooltip,
@@ -39,23 +38,31 @@ import {
 import { Bell, ChevronDown, Headset, Image, Sun, Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Container from './ui/container';
+import { Button } from './ui/button';
 
 export default function NavBar() {
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
-
-  useEffect(() => {
-    document.body.style.overflow = isMobileOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMobileOpen]);
   const { theme, toggleTheme } = useTheme();
   return (
     <>
-      <Container className=' py-4 sticky top-0 bg-transparent z-50'>
+      <Container className=' py-4 sticky top-0 bg-transparent dark:text-white z-50'>
+        <div className='md:hidden flex items-center justify-between'>
+          <Hamburger />
+          <div className='flex items-center gap-4'>
+            <button
+              onClick={toggleTheme}
+              className='bg-gray-100 dark:bg-[#262626] dark:text-white p-2 rounded-full'
+            >
+              {theme === 'dark' ? <Moon size={18} /> : <Sun size={18} />}
+            </button>
+            <button className=' bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 h-7 w-7 rounded-full'></button>
+          </div>
+        </div>
         <div className='hidden md:flex  items-center justify-between '>
           <div className='flex items-center gap-8'>
-            <Link href='/' className='font-bold text-black text-3xl'>
+            <Link
+              href='/'
+              className='font-bold text-black dark:text-white text-3xl'
+            >
               <Logo />
             </Link>
             <button className=' flex items-center gap-2'>
@@ -64,7 +71,7 @@ export default function NavBar() {
               <ChevronDown size={13} />
             </button>
           </div>
-          <NavigationMenu className='mx-auto bg-gray-100 dark:bg-[#202020] rounded-xl px-3 py-1 '>
+          <NavigationMenu className='mx-auto bg-gray-100  dark:bg-[#202020] rounded-xl px-3 py-1 '>
             <NavigationMenuList>
               {menu.map((menu) => (
                 <NavigationMenuItem key={menu.label}>
@@ -73,7 +80,7 @@ export default function NavBar() {
                       <NavigationMenuTrigger>
                         <menu.icon />
                       </NavigationMenuTrigger>
-                      <NavigationMenuContent className='pt-20 px-6   rounded-4xl group-data-[viewport=false]/navigation-menu:border-none bg-white  flex gap-44'>
+                      <NavigationMenuContent className='pt-20 px-6   rounded-4xl group-data-[viewport=false]/navigation-menu:border-none bg-white  dark:bg-black flex gap-44'>
                         {menu.submenu?.map((section) => (
                           <div key={section.title} className='pb-6'>
                             <h4 className='text-lg text-gray-400 font-semibold'>
@@ -101,7 +108,7 @@ export default function NavBar() {
                         <NavigationMenuLink
                           key={menu.href}
                           href={menu.href}
-                          className='flex  items-center gap-4 hover:bg-gray-200 hover:rounded-xl'
+                          className='flex  items-center gap-4 hover:bg-gray-200 dark:hover:bg-[#333333] hover:rounded-xl'
                         >
                           <menu.icon />
                         </NavigationMenuLink>
@@ -116,24 +123,34 @@ export default function NavBar() {
             </NavigationMenuList>
           </NavigationMenu>
           <div className='flex items-center gap-4'>
-            <button className='flex items-center gap-2 bg-gray-100 dark:bg-[#262626] py-1.5 px-3 rounded-lg text-xs'>
+            <Button className='flex items-center gap-2  bg-gray-100 dark:text-white dark:bg-[#262626] py-1.5 px-3 rounded-xl text-xs cursor-pointer'>
               <Image size={18} />
-              <span className='hidden lg:flex'>Gallery</span>
-            </button>
-            <button className='flex items-center gap-2  bg-gray-100 dark:bg-[#262626] py-1.5 px-3 rounded-lg text-xs'>
+              <span className='hidden sm:inline'>Gallery</span>
+            </Button>
+            <Button className='flex items-center gap-2  bg-gray-100 dark:text-white dark:bg-[#262626] py-1.5 px-3 rounded-xl text-xs cursor-pointer'>
               <Headset size={18} />
-              <span className='hidden lg:flex'>Support</span>
-            </button>
-            <button className='bg-gray-100 dark:bg-[#262626] p-2 rounded-full'>
+              <span className='hidden sm:inline'>Support</span>
+            </Button>
+            <Button
+              variant='secondary'
+              size='icon'
+              className='bg-gray-100 dark:bg-[#262626] dark:text-white p-2 rounded-full cursor-pointers'
+            >
               <Bell size={18} />
-            </button>
-            <button
+            </Button>
+            <Button
+              variant='secondary'
+              size='icon'
               onClick={toggleTheme}
-              className='bg-gray-100 dark:bg-[#262626] p-2 rounded-full'
+              className='bg-gray-100 size-8 dark:bg-[#262626] dark:text-white p-2 rounded-full cursor-pointer'
             >
               {theme === 'dark' ? <Moon size={18} /> : <Sun size={18} />}
-            </button>
-            <button className=' bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 h-7 w-7 rounded-full'></button>
+            </Button>
+
+            <Button
+              size='sm'
+              className='cursor-pointer bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 h-7 w-7 rounded-full'
+            ></Button>
           </div>
         </div>
       </Container>

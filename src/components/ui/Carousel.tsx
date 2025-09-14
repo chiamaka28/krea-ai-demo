@@ -212,7 +212,7 @@ function CarouselDots({ className }: { className?: string }) {
           className={cn(
             'h-2 w-2 rounded-full  transition',
             index === selectedIndex
-              ? 'bg-black'
+              ? 'bg-black dark:bg-white'
               : 'bg-gray-300 opacity-50 hover:opacity-100'
           )}
           aria-label={`Go to slide ${index + 1}`}
