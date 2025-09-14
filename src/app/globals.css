@@ -1,8 +1,15 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --icon-color: #111;
+}
+
+.dark-mode {
+  --icon-color: #eee; /* Dark mode color */
 }
 
 @theme inline {
@@ -20,7 +27,10 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+svg {
+  color: var(--icon-color);
+  transition: color 0.3s ease-in-out; /* smooth transition */
 }
